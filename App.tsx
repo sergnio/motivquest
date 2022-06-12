@@ -10,6 +10,8 @@ import {
 //@ts-ignore
 import logo from "./assets/potion.png";
 import { useState } from "react";
+import Button from "./components/Button/Button";
+import { marginPadding } from "./styles/globalStyles";
 
 export default () => {
   const [text, setText] = useState("");
@@ -20,20 +22,15 @@ export default () => {
         Keep track of your main activities which affect your motivation :)
       </Text>
 
-      <View>
+      <View style={styles.inputRow}>
         <TextInput
-          style={{ height: 40 }}
-          placeholder="Type here to translate!"
+          style={styles.inputBox}
+          placeholder="Enter your habit here!"
           onChangeText={(newText) => setText(newText)}
           defaultValue={text}
         />
-        <TouchableOpacity
-          onPress={() => alert("Hello, world!")}
-          style={{ backgroundColor: "blue", padding: 10 }}
-        >
-          <Text style={{ fontSize: 20, color: "#fff" }}>+</Text>
-        </TouchableOpacity>
-        <Text style={{ fontSize: 20, color: "#fff" }}>-</Text>
+        <Button text="+" customStyle={styles.xsMargin} />
+        <Button text="-" customStyle={styles.xsMargin} />
       </View>
       <StatusBar style="auto" />
     </View>
@@ -42,15 +39,23 @@ export default () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 50,
+    paddingTop: marginPadding.l,
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     // justifyContent: 'center',
   },
+  xsMargin: { marginHorizontal: marginPadding.xs },
   header1: {
     color: "hsl(0,0%,0%)",
     fontSize: 18,
+  },
+  inputBox: { height: 40, marginHorizontal: marginPadding.s },
+  inputRow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   potion: { width: 305, height: 159, resizeMode: "contain" },
 });

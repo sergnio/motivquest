@@ -1,14 +1,23 @@
 import React from "react";
-import { StyleSheet, Text, TextStyle, TouchableOpacity } from "react-native";
+import {
+  GestureResponderEvent,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+} from "react-native";
 
 interface Props {
   text: string;
+  onPress?: (event: GestureResponderEvent) => void;
   customStyle?: TextStyle;
 }
-export default ({ text, customStyle }: Props) => {
+
+const defaultHandler = () => alert(`Hello!`);
+export default ({ text, customStyle, onPress = defaultHandler }: Props) => {
   return (
     <TouchableOpacity
-      onPress={() => alert(`Hello, ${text}!`)}
+      onPress={onPress}
       style={{ ...styles.container, ...customStyle }}
     >
       <Text style={styles.text}>{text}</Text>
@@ -19,7 +28,7 @@ export default ({ text, customStyle }: Props) => {
 const widthHeight = 25;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#366bf9",
+    backgroundColor: "hsl(224, 94.2%, 59.4%)",
     width: widthHeight,
     height: widthHeight * 1.5,
     display: "flex",

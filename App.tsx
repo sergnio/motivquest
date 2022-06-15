@@ -1,36 +1,36 @@
 import { StatusBar } from "expo-status-bar";
 import {
+  FlatList,
   Image,
+  ListRenderItemInfo,
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  TextInput,
 } from "react-native";
 //@ts-ignore
 import logo from "./assets/potion.png";
-import { useState } from "react";
 import Button from "./components/Button/Button";
 import { marginPadding } from "./styles/globalStyles";
+import useActivities, {
+  MotivActivity,
+} from "./components/Activity/useActivites";
+import Activity from "./components/Activity/Activity";
 
 export default () => {
-  const [text, setText] = useState("");
+  const { activities, createNewActivity } = useActivities();
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.potion} />
       <Text style={styles.header1}>
         Keep track of your main activities which affect your motivation :)
       </Text>
-
+      <FlatList
+        data={activities}
+        renderItem={({ item }) => <Activity activity={item} />}
+      />
       <View style={styles.inputRow}>
-        <TextInput
-          style={styles.inputBox}
-          placeholder="Enter your habit here!"
-          onChangeText={(newText) => setText(newText)}
-          defaultValue={text}
-        />
-        <Button text="+" customStyle={styles.xsMargin} />
-        <Button text="-" customStyle={styles.xsMargin} />
+        <Text style={styles.xsMargin}>Add new activity!</Text>
+        <Button text="+" onPress={createNewActivity} />
       </View>
       <StatusBar style="auto" />
     </View>

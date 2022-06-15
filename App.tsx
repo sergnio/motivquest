@@ -1,61 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  FlatList,
-  Image,
-  ListRenderItemInfo,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
-//@ts-ignore
-import logo from "./assets/potion.png";
-import Button from "./components/Button/Button";
-import { marginPadding } from "./styles/globalStyles";
-import useActivities, {
-  MotivActivity,
-} from "./components/Activity/useActivites";
-import Activity from "./components/Activity/Activity";
+import MotivAppProvider from "./components/Providers/MotivAppProvider";
+import Main from "./components/Main";
 
 export default () => {
-  const { activities, createNewActivity } = useActivities();
   return (
-    <View style={styles.container}>
-      <Image source={logo} style={styles.potion} />
-      <Text style={styles.header1}>
-        Keep track of your main activities which affect your motivation :)
-      </Text>
-      <FlatList
-        data={activities}
-        renderItem={({ item }) => <Activity activity={item} />}
-      />
-      <View style={styles.inputRow}>
-        <Text style={styles.xsMargin}>Add new activity!</Text>
-        <Button text="+" onPress={createNewActivity} />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <MotivAppProvider>
+      <Main />
+    </MotivAppProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: marginPadding.l,
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    // justifyContent: 'center',
-  },
-  xsMargin: { marginHorizontal: marginPadding.xs },
-  header1: {
-    color: "hsl(0,0%,0%)",
-    fontSize: 18,
-  },
-  inputBox: { height: 40, marginHorizontal: marginPadding.s },
-  inputRow: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  potion: { width: 305, height: 159, resizeMode: "contain" },
-});

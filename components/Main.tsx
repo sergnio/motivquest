@@ -12,6 +12,7 @@ import axios from "axios";
 
 const fetchData = async () => {
   try {
+    console.log("fetchin data");
     const result = await axios.get(
       createGetActivitiesForUserUrl("62a91a54723f12f84d207875")
       // "http://localhost:3000/"
@@ -29,8 +30,7 @@ export default () => {
   );
 
   useEffect(() => {
-    console.log("fetchin data");
-    fetchData();
+    // fetchData();
   });
   return (
     <View style={styles.container}>

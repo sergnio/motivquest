@@ -9,7 +9,7 @@ if (apiurl == null)
   );
  */
 
-// const baseUserUrl = `${baseUrl}/users`;
+// see the react query provider to see how the entire url is constructed
 const baseUserUrl = `/users`;
 const getUserId = (userId: string) => `${baseUserUrl}/${userId}`;
 export const createGetActivitiesForUserUrl = (userId: string) =>

@@ -4,6 +4,12 @@ import { createGetActivitiesForUserUrl } from "../../apiRoutes/apiRoutes";
 import axios from "axios";
 import { getActivityForUser } from "../../apiRoutes/queryKeys";
 
+export interface User {
+  name: string;
+  email: string;
+  activities: MotivActivity[];
+}
+
 export interface MotivActivity {
   name: string;
   timesDone: number;
@@ -28,7 +34,9 @@ const emptyActivity: MotivActivity = { name: "", timesDone: 0 };
 
 export default (userId: string) => {
   // const queryResults = { isLoading: false, data: {} };
-  const queryResults = useQuery(createGetActivitiesForUserUrl(userId));
+  const queryResults = useQuery<Promise<User>, any, any, string>(
+    createGetActivitiesForUserUrl(userId)
+  );
   console.log("result", queryResults.data);
   const [activities, setActivities] =
     useState<MotivActivity[]>(motivActivities);

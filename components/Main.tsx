@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 // @ts-ignore
 import logo from "../assets/potion.png";
@@ -7,46 +7,25 @@ import Button from "./Button/Button";
 import { StatusBar } from "expo-status-bar";
 import { marginPadding } from "../styles/globalStyles";
 import useActivities from "./Activity/useActivites";
-import { createGetActivitiesForUserUrl } from "../apiRoutes/apiRoutes";
-import axios from "axios";
-
-const fetchData = async () => {
-  try {
-    console.log("fetchin data");
-    const result = await axios.get(
-      createGetActivitiesForUserUrl("62a91a54723f12f84d207875")
-      // "http://localhost:3000/"
-    );
-    console.log("done fetching data");
-    console.log({ result });
-  } catch (e) {
-    console.log("error", e);
-  }
-};
 
 export default () => {
-  const { activities, createNewActivity, queryResults } = useActivities(
+  const { createNewActivity, queryResults } = useActivities(
     "62a91a54723f12f84d207875"
   );
 
-  useEffect(() => {
-    // fetchData();
-  });
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.potion} />
       <Text style={styles.header1}>
-        Keep track of your main activities which affect your motivation :)
+        Keep track of your main activities which affect your motivation :) v 1.1
       </Text>
-      <Text>
-        {queryResults.isLoading
-          ? "Loading..."
-          : JSON.stringify(queryResults.data)}
-      </Text>
-      <FlatList
-        data={activities}
-        renderItem={({ item }) => <Activity activity={item} />}
-      />
+      {queryResults.isLoading && <Text>"Loading Data..."</Text>}
+      {queryResults.data && (
+        <FlatList
+          data={queryResults.data.activities}
+          renderItem={({ item }) => <Activity activity={item} />}
+        />
+      )}
       <View style={styles.inputRow}>
         <Text style={styles.xsMargin}>Add new activity!</Text>
         <Button text="+" onPress={createNewActivity} />

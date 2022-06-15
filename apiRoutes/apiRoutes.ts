@@ -1,7 +1,6 @@
-// const apiurl = "https://motivquestnodeapi.herokuapp.com";
-const apiurl = "http://localhost:3000";
+const apiurl = "https://motivquestnodeapi.herokuapp.com";
+// const apiurl = "http://localhost:3000";
 export const baseUrl = apiurl;
-console.log({ apiurl });
 /*
 uncomment if we change out to env variable instead of hard coded string
 if (apiurl == null)

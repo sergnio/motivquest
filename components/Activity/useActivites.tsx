@@ -27,8 +27,9 @@ const motivActivities: MotivActivity[] = [
 const emptyActivity: MotivActivity = { name: "", timesDone: 0 };
 
 export default (userId: string) => {
-  const queryResults = useQuery(createGetActivitiesForUserUrl(userId));
-  console.log("result", queryResults.data);
+  const queryResults = { isLoading: false, data: {} };
+  // const queryResults = useQuery(createGetActivitiesForUserUrl(userId));
+  // console.log("result", queryResults.data);
   const [activities, setActivities] =
     useState<MotivActivity[]>(motivActivities);
 

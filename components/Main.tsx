@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, Image, StyleSheet, Text, View } from "react-native";
 // @ts-ignore
 import logo from "../assets/potion.png";
@@ -7,11 +7,31 @@ import Button from "./Button/Button";
 import { StatusBar } from "expo-status-bar";
 import { marginPadding } from "../styles/globalStyles";
 import useActivities from "./Activity/useActivites";
+import { createGetActivitiesForUserUrl } from "../apiRoutes/apiRoutes";
+import axios from "axios";
+
+const fetchData = async () => {
+  try {
+    const result = await axios.get(
+      createGetActivitiesForUserUrl("62a91a54723f12f84d207875")
+      // "http://localhost:3000/"
+    );
+    console.log("done fetching data");
+    console.log({ result });
+  } catch (e) {
+    console.log("error", e);
+  }
+};
 
 export default () => {
   const { activities, createNewActivity, queryResults } = useActivities(
     "62a91a54723f12f84d207875"
   );
+
+  useEffect(() => {
+    console.log("fetchin data");
+    fetchData();
+  });
   return (
     <View style={styles.container}>
       <Image source={logo} style={styles.potion} />

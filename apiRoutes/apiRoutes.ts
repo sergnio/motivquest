@@ -1,4 +1,5 @@
-const apiurl = "https://motivquestnodeapi.herokuapp.com";
+// const apiurl = "https://motivquestnodeapi.herokuapp.com";
+const apiurl = "http://localhost:3000";
 const baseUrl = apiurl;
 console.log({ apiurl });
 /*
@@ -9,7 +10,7 @@ if (apiurl == null)
   );
  */
 
-const baseUserUrl = "/users";
+const baseUserUrl = `${baseUrl}/users`;
 const getUserId = (userId: string) => `${baseUserUrl}/${userId}`;
 export const createGetActivitiesForUserUrl = (userId: string) =>
   `${getUserId(userId)}/activities`;

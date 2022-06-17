@@ -6,6 +6,7 @@ import {
   TextStyle,
   TouchableOpacity,
 } from "react-native";
+import { colors } from "../../styles/globalStyles";
 
 interface Props {
   text: string;
@@ -28,12 +29,12 @@ export default ({ text, customStyle, onPress = defaultHandler }: Props) => {
 const widthHeight = 25;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "hsl(224, 94.2%, 59.4%)",
+    backgroundColor: colors.blue400,
     width: widthHeight,
     height: widthHeight * 1.5,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
-  text: { fontSize: 20, color: "#fff" },
+  text: { fontSize: 20, color: colors.white },
 });

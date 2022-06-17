@@ -1,0 +1,61 @@
+:root {
+  --widthHeight: 100px;
+  --white: hsl(100, 100%, 100%);
+  --blue100: hsl(224, 94.2%, 90%);
+  --blue200: hsl(224, 94.2%, 80%);
+  --blue300: hsl(224, 94.2%, 70%);
+  --blue400: hsl(224, 94.2%, 60%);
+  --blue500: hsl(224, 94.2%, 50%);
+  --blue600: hsl(224, 94.2%, 40%);
+  --blue700: hsl(224, 94.2%, 30%);
+  --blue800: hsl(224, 94.2%, 20%);
+  --blue900: hsl(224, 94.2%, 10%);
+}
+
+/*
+  Just create a <div class="bottle"/>
+ */
+
+.bottle {
+  position: relative;
+  width: var(--widthHeight);
+  height: var(--widthHeight);
+  background-color: var(--blue600);
+  border: 0.25rem solid var(--blue700);
+  border-radius: 50%;
+  outline: 0;
+  /*  comment this to debug */
+  overflow: hidden;
+}
+
+.bottle::before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottle::after {
+  content: "";
+  position: absolute;
+  width: 125px;
+  height: 125px;
+  /*  make the border blue to debug */
+  /*background-color: var(--blue800);*/
+  background-color: var(--white);
+  border-radius: 45%;
+  /*  the lower the translate, the shorter this should be  */
+  animation: keepSpinning 25s linear infinite;
+}
+
+@keyframes keepSpinning {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-50%) rotate(500deg);
+  }
+
+  0% {
+    transform: translateY(-50%) rotate(-500deg);
+  }
+}

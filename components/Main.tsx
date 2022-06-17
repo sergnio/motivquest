@@ -7,6 +7,7 @@ import Button from "./Button/Button";
 import { StatusBar } from "expo-status-bar";
 import { marginPadding } from "../styles/globalStyles";
 import useActivities from "./Activity/useActivites";
+import Battery from "./Battery/Battery";
 
 export default () => {
   const { createNewActivity, queryResults } = useActivities(
@@ -15,7 +16,7 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <Image source={logo} style={styles.potion} />
+      <Battery />
       <Text style={styles.header1}>
         Keep track of your main activities which affect your motivation :) v 1.1
       </Text>

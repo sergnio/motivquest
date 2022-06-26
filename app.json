@@ -2,7 +2,7 @@
   "expo": {
     "name": "MotivQuest",
     "slug": "MotivQuest",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.sergnio.MotivQuest"
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { createGetActivitiesForUserUrl } from "../../apiRoutes/apiRoutes";
-import axios from "axios";
-import { getActivityForUser } from "../../apiRoutes/queryKeys";
+import { dateYesterday, newDate } from "../../utls/betterDate";
 
 export interface User {
   name: string;
@@ -12,7 +11,12 @@ export interface User {
 
 export interface MotivActivity {
   name: string;
+  dailyActivites: DailyActivity[];
+}
+
+export interface DailyActivity {
   timesDone: number;
+  dayOf: string;
   // buffs: Buff[];
 }
 
@@ -21,23 +25,20 @@ export interface Buff {
   value: number;
 }
 
-const motivActivities: MotivActivity[] = [
-  {
-    name: "Programming for fun",
-    timesDone: 3,
-    // buffs: [{ type: "hourly", value: 6 }],
-  },
-];
+const motivActivities: MotivActivity[] = [];
 
-// const emptyActivity: MotivActivity = { name: "", timesDone: 0, buffs: [] };
-const emptyActivity: MotivActivity = { name: "", timesDone: 0 };
+const emptyActivity: MotivActivity = {
+  name: "Test",
+  dailyActivites: [
+    { timesDone: 2, dayOf: newDate() },
+    { timesDone: 5, dayOf: dateYesterday() },
+  ],
+};
 
 export default (userId: string) => {
-  // const queryResults = { isLoading: false, data: {} };
   const queryResults = useQuery<Promise<User>, any, any, string>(
     createGetActivitiesForUserUrl(userId)
   );
-  console.log("result", queryResults.data);
   const [activities, setActivities] =
     useState<MotivActivity[]>(motivActivities);
 

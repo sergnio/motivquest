@@ -6,13 +6,16 @@ import Activity from "./Activity/Activity";
 import Button from "./Button/Button";
 import { StatusBar } from "expo-status-bar";
 import { marginPadding } from "../styles/globalStyles";
-import useActivities from "./Activity/useActivites";
+import useActivities, { User } from "./Activity/useActivites";
 import Battery from "./Battery/Battery";
 
 export default () => {
-  const { createNewActivity, queryResults } = useActivities(
-    "62a91a54723f12f84d207875"
-  );
+  const {
+    createNewActivity,
+    queryResults: { isLoading, data },
+  } = useActivities("62a91a54723f12f84d207875");
+  const x = data as User;
+  x.activities.map((a) => a.dailyActivites.filter((da) => da.dayOf));
 
   return (
     <View style={styles.container}>
@@ -20,10 +23,10 @@ export default () => {
       <Text style={styles.header1}>
         Keep track of your main activities which affect your motivation :) v 1.1
       </Text>
-      {queryResults.isLoading && <Text>"Loading Data..."</Text>}
-      {queryResults.data && (
+      {isLoading && <Text>"Loading Data..."</Text>}
+      {data && (
         <FlatList
-          data={queryResults.data.activities}
+          data={data.activities}
           renderItem={({ item }) => <Activity activity={item} />}
         />
       )}

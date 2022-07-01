@@ -10,8 +10,8 @@ interface Props {
 const doneTypingInterval = 5000;
 export default ({ activity }: Props) => {
   const [text, setText] = useState(activity.name);
-  const mutate = (text: any) => {
-    console.log("calling mutate");
+  const mutate = (text: string) => {
+    console.log("calling mutate - dummy function");
   };
 
   useEffect(() => {
@@ -29,7 +29,8 @@ export default ({ activity }: Props) => {
           setText(newText);
         }}
       />
-      <Text style={styles.timesDone}>{activity.timesDone}</Text>
+      {/* todo - fix */}
+      {/*<Text style={styles.timesDone}>{activity.timesDone}</Text>*/}
       <Button text="+" customStyle={styles.xsMargin} />
       <Button text="-" customStyle={styles.xsMargin} />
     </View>
